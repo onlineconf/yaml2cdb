@@ -11,8 +11,9 @@ import (
 )
 
 var (
-	yamlFile = flag.String("in", "", "input yaml file")
-	cdbFile  = flag.String("out", "", "result cdb file")
+	yamlFile   = flag.String("in", "", "input yaml file")
+	cdbFile    = flag.String("out", "", "result cdb file")
+	childLists = flag.Bool("cl", false, "generate onlineconf child lists, as the child_lists module option does")
 )
 
 func main() {
@@ -37,7 +38,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	items, err := converter.CDBItems(data, "")
+	items, err := converter.CDBItems(data, "", *childLists)
 	if err != nil {
 		log.Fatal(err)
 	}
